@@ -40,3 +40,9 @@
 .read-the-docs {
   color: #888;
 }
+
+.task-counter {
+  margin-top: 20px;
+  font-size: 18px;
+  font-weight: bold;
+}
