@@ -10,20 +10,33 @@ function App() {
 
 
   // Funcion para agregar una nueva tarea
-
   const addTask = (taskText) =>{
+
     if(taskText.trim() !== "") {
+
       const newTasks = [...tasks, {id: Date.now(), text: taskText, complete: false}]
       setTasks(newTasks)
-      console.log("Tareas actualizadas:", newTasks);
+      
     }
+  }
+
+  // Funcion para eliminar tarea
+
+  const removeTask = (taskId) => {
+    // Filtra la lista de tareas, eliminando la tarea con el id recibido
+    const filterTask = tasks.filter((task) => task.id !== taskId)
+
+    // Actualiza el estado con las tareas filtradas
+    setTasks(filterTask)
+
   }
 
   return (
     <>
     <h1>List de tareas</h1>
     <TaskInput addTask={addTask}/>
-    <TaskList tasks={tasks}/>
+     {/* Pasamos la función tasks y removeTask como prop a TaskList */}
+    <TaskList tasks={tasks} removeTask = {removeTask}/>
     </>
   )
 }
