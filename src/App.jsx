@@ -6,8 +6,9 @@ import './App.css'
 // Funcion para mantener los datos al acutualizar la pagina LocalStorage
 const loadTasksLocalStorage = () => {
 
-  const storedTask = localStorage.getItem('tasks')
-  return storedTask ? JSON.parse(storedTask) : []
+  const storedTask = localStorage.getItem('tasks') // Obtenemos las tareas guardadas
+  return storedTask ? JSON.parse(storedTask) : [] // Si hay tareas, las convertimos de JSON a objeto, si no, devolvemos un array vacío
+
 }
 
 function App() {
@@ -19,7 +20,7 @@ function App() {
 
   // Guarda las tareas en el LocalStorage
   const saveTasksLocalStorage = (tasks) => {
-    localStorage.setItem('tasks', JSON.stringify(tasks))
+    localStorage.setItem('tasks', JSON.stringify(tasks)) // Convertimos el array de tareas a JSON y lo guardamos
   }
 
 
@@ -27,11 +28,12 @@ function App() {
   // Funcion para agregar una nueva tarea
   const addTask = (taskText) => {
 
-    if (taskText.trim() !== "") {
+    if (taskText.trim() !== "") { // Verificamos que el texto no esté vacío
 
-      const newTasks = [...tasks, { id: Date.now(), text: taskText, complete: false }]
-      setTasks(newTasks)
-      saveTasksLocalStorage(newTasks) // Guardamos en localStorage
+      const newTasks = [...tasks, { id: Date.now(), text: taskText, complete: false }] // Creamos una nueva tarea con un ID único
+      
+      setTasks(newTasks)// Actualizamos el estado con la nueva lista de tareas
+      saveTasksLocalStorage(newTasks) // Guardamos la lista en LocalStorage
 
     }
   }
@@ -43,8 +45,9 @@ function App() {
     const filterTask = tasks.filter((task) => task.id !== taskId)
 
     // Actualiza el estado con las tareas filtradas
-    setTasks(filterTask)
-    saveTasksLocalStorage(filterTask)
+
+    setTasks(filterTask) // Actualizamos el estado con la nueva lista
+    saveTasksLocalStorage(filterTask) // Guardamos en LocalStorage
 
   }
 
@@ -52,11 +55,11 @@ function App() {
   const updateTask = (taskId) => {
 
     const updatedTasks = tasks.map((task) =>
-      task.id === taskId ? { ...task, complete: !task.complete } : task
+      task.id === taskId ? { ...task, complete: !task.complete } : task // Cambiamos el estado de `complete` al opuesto
     )
 
-    setTasks(updatedTasks)
-    saveTasksLocalStorage(updatedTasks);
+    setTasks(updatedTasks) // Actualizamos el estado con la lista modificada
+    saveTasksLocalStorage(updatedTasks); // Guardamos los cambios en LocalStorage
 
   }
 
@@ -67,15 +70,22 @@ function App() {
   return (
     <>
       <h1>List de tareas</h1>
-      <TaskInput addTask={addTask} />
+
+      <TaskInput 
+      addTask={addTask}  
+      />
+
       {/* Pasamos la función tasks y removeTask como prop a TaskList */}
+    
       <TaskList
         tasks={tasks}
         removeTask={removeTask}
         updateTask={updateTask} />
+
       <div className="task-counter">
         <p>{pendingTasksCount} Tareas pendientes</p>
       </div>
+
     </>
   )
 }
