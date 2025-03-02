@@ -31,12 +31,26 @@ function App() {
 
   }
 
+   // Función para actualizar el estado de la tarea (marcarla como completada o no)
+   const updateTask = (taskId) => {
+    
+    const updatedTasks = tasks.map((task) => 
+      task.id === taskId ? {...task, complete: !task.complete} : task
+    )
+
+    setTasks(updatedTasks)
+
+   }
+
   return (
     <>
     <h1>List de tareas</h1>
     <TaskInput addTask={addTask}/>
      {/* Pasamos la función tasks y removeTask como prop a TaskList */}
-    <TaskList tasks={tasks} removeTask = {removeTask}/>
+    <TaskList 
+    tasks={tasks} 
+    removeTask = {removeTask}
+    updateTask={updateTask}/>
     </>
   )
 }

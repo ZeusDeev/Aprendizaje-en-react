@@ -1,8 +1,20 @@
 import React from "react"
 
-export const TaskItem = ({task, removeTask}) => {
+
+// Componente TaskItem para mostrar cada tarea
+export const TaskItem = ({task, removeTask, updateTask}) => {
+
+ // Función para manejar el cambio en el checkbox (marcar/desmarcar como completada)
+ const handleCheckBoxChange = () => {
+    updateTask(task.id)
+ }
     return (
         <li>
+            <input 
+            type="checkbox"
+            checked = {task.complete}
+            onChange={handleCheckBoxChange}
+             />
             { 
             /* Muestra el texto de la tarea */ 
             task.text 

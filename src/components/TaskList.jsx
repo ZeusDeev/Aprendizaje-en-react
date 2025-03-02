@@ -1,7 +1,7 @@
 import { TaskItem } from "./TaskItem";
 
 
-export function TaskList({tasks = [], removeTask}) {
+export function TaskList({tasks = [], removeTask, updateTask}) {
     console.log("Tareas recibidas en TaskList: ", tasks)
 
     return (
@@ -9,7 +9,12 @@ export function TaskList({tasks = [], removeTask}) {
         <ul>
             {/* Itera sobre la lista de tareas y renderiza cada una */}
             {tasks.map((task) => (
-                <TaskItem key={task.id} task={task} removeTask={removeTask}/>
+                <TaskItem 
+                key={task.id} 
+                task={task} 
+                removeTask={removeTask} 
+                updateTask={updateTask}
+                />
             ))
             }
         </ul>
