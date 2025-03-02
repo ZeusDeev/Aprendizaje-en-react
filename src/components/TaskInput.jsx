@@ -7,7 +7,9 @@ export function TaskInput({ addTask }) {
  // Maneja el envio del formulario
 
  const handleSubmit = (e) => {
-     e.preventDefualt() // Evita que nuestra pagina se recargue
+    console.log("Testing")
+     e.preventDefault() // Evita que nuestra pagina se recargue
+     if (taskText.trim() === "") return
      addTask(taskText) // Agrega la tarea a la lista
      setTaskText("") // Limpia el input despues de agregar
  }
@@ -16,7 +18,8 @@ export function TaskInput({ addTask }) {
      <form onSubmit={handleSubmit}>
          <input 
          type="text" 
-         onChange={(e) => e.target.value} 
+         value={taskText}
+         onChange={(e) => setTaskText(e.target.value)} 
          placeholder = "Escribe una tarea..."
          />
 

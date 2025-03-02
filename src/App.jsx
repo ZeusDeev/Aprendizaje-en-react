@@ -1,16 +1,21 @@
 import { useState } from 'react'
 import { TaskInput } from './components/TaskInput'
+import { TaskList } from './components/TaskList'
 import './App.css'
 
 function App() {
   // Estado para almacenar las lista de tareas
-  const [task, setTask] = useState([])
+  const [tasks, setTasks] = useState([])
+
+
 
   // Funcion para agregar una nueva tarea
 
   const addTask = (taskText) =>{
     if(taskText.trim() !== "") {
-      setTask([...task, {id: Date.now(), text: taskText, complete: false}])
+      const newTasks = [...tasks, {id: Date.now(), text: taskText, complete: false}]
+      setTasks(newTasks)
+      console.log("Tareas actualizadas:", newTasks);
     }
   }
 
@@ -18,6 +23,7 @@ function App() {
     <>
     <h1>List de tareas</h1>
     <TaskInput addTask={addTask}/>
+    <TaskList tasks={tasks}/>
     </>
   )
 }
